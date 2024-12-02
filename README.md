@@ -1,1 +1,1 @@
-# prime_project
+# Prime Project
