@@ -1,1 +1,1 @@
-# Prime Project
+# PRIME Project
