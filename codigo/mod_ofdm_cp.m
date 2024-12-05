@@ -3,9 +3,12 @@ function out = mod_ofdm_cp(Nfft, Nofdm, Nf, L_cp, x_mod)
     X = zeros(Nfft, Nofdm);
     
     X(88:88+Nf-1, :) = s(1:Nf, :);
-    X = X + flipud(conj(X)); % Simetría hermítica
+
+    X = X + flipud(conj(X));
     
     y_ofdm = ifft(X, Nfft, 'symmetric');
-    y_ofdm_cp = [y_ofdm(end-L_cp+1:end, :); y_ofdm]; % Añadir prefijo cíclico
+
+     % Añadir prefijo cíclico
+    y_ofdm_cp = [y_ofdm(end-L_cp+1:end, :); y_ofdm];
     out = reshape(y_ofdm_cp, [], 1);
 end
