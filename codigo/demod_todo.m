@@ -7,13 +7,12 @@ end
 if M == 2
     dbpsk_demod = comm.DPSKDemodulator(2,0,'BitOutput',true);
     rx_bits_aleatorio = dbpsk_demod(y_ofdm);
-    rx_bits = desaleatorizacion(rx_bits_aleatorio, vector_aleatorizacion);
 elseif M == 4
     dqpsk_demod = comm.DPSKDemodulator(4,0,'BitOutput',true);
     rx_bits_aleatorio = dqpsk_demod(y_ofdm);
-    rx_bits = desaleatorizacion(rx_bits_aleatorio, vector_aleatorizacion);
 elseif M == 8
     d8psk_demod = comm.DPSKDemodulator(8,0,'BitOutput',true);
     rx_bits_aleatorio = d8psk_demod(y_ofdm);
-    rx_bits = desaleatorizacion(rx_bits_aleatorio, vector_aleatorizacion);
 end
+
+rx_bits = desaleatorizacion(rx_bits_aleatorio, vector_aleatorizacion);

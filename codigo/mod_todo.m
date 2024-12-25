@@ -1,19 +1,13 @@
-function [x_ofdm, tx_bits, vector_aleatorizacion] = mod_todo(M, L_trama, Nfft, Nofdm, Nf, PrefijoCiclico, Lcp)
+function [x_ofdm, piloto] = mod_todo(M, tx_bits, Nfft, Nofdm, Nf, PrefijoCiclico, Lcp)
 if M == 2
-    tx_bits = randi([0,1],L_trama,1);
-    [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
-    x_mod = mod_dbpsk(tx_aleatorio);
+    x_mod = mod_dbpsk(tx_bits);
 elseif M == 4
-    tx_bits = randi([0,1],L_trama,1);
-    [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
-    x_mod = mod_dqpsk(tx_aleatorio);
+    x_mod = mod_dqpsk(tx_bits);
 elseif M == 8
-    tx_bits = randi([0,1],L_trama,1);
-    [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
-    x_mod = mod_d8psk(tx_aleatorio);
+    x_mod = mod_d8psk(tx_bits);
 end
 if PrefijoCiclico == 0
-    x_ofdm = mod_ofdm(Nfft,Nofdm,Nf,x_mod);
+    [x_ofdm, piloto] = mod_ofdm(Nfft,Nofdm,Nf,x_mod);
 else 
-    x_ofdm = mod_ofdm_cp(Nfft,Nofdm,Nf,Lcp,x_mod);
+    [x_ofdm, piloto] = mod_ofdm_cp(Nfft,Nofdm,Nf,Lcp,x_mod);
 end
