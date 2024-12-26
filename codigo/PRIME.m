@@ -2,7 +2,7 @@ clear all
 clc
 %% Modulaciones
 % Número de símbolos ofdm. Igual para todas las modulaciones
-M = 63; 
+M = 44; 
 
 %d8psk
 N_d8psk = 288*M;
@@ -24,7 +24,7 @@ N_tramas = [N_tramas_dbpsk, N_tramas_dqpsk, N_tramas_d8psk];
 L_tramas = [N_dbpsk, N_dqpsk, N_d8psk];
 
 Nfft = 512; % Número de puntos fft. Número de subportadores disponibles
-Nofdm = 63; % Número de símbolos ofdm
+Nofdm = M; % Número de símbolos ofdm
 Nf = 96; % Número de subportadoras
 
 % Vector de SNRs
@@ -111,28 +111,31 @@ figure
 semilogy(SNR_dB, BER(1,:))
 hold on
 semilogy(SNR_dB, BER_teor(1,:))
+grid
 legend('DBPSK','DBPSK_{teorica}')
 ylabel('BER (Bit Error Rate)')
 xlabel('SNR (Signal to Noise Relation)')
-title('Curvas BER vs SNR sin distorsión')
+title('Curvas BER vs SNR canal ideal')
 
 figure
 semilogy(SNR_dB, BER(2,:))
 hold on
 semilogy(SNR_dB, BER_teor(2,:))
+grid
 legend('DQPSK','DQPSK_{teorica}')
 ylabel('BER (Bit Error Rate)')
 xlabel('SNR (Signal to Noise Relation)')
-title('Curvas BER vs SNR sin distorsión')
+title('Curvas BER vs SNR canal ideal')
 
 figure
 semilogy(SNR_dB, BER(3,:))
 hold on
 semilogy(SNR_dB, BER_teor(3,:))
+grid
 legend('D8PSK','D8PSK_{teorica}')
 ylabel('BER (Bit Error Rate)')
 xlabel('SNR (Signal to Noise Relation)')
-title('Curvas BER vs SNR sin distorsión')
+title('Curvas BER vs SNR canal ideal')
 
 
 %% Expresión algebraica de la señal recibida incluyendo únicamente el efecto del canal
@@ -531,6 +534,7 @@ constraint_length = 7;
 % 171 y 133 son números en base octal correspondiente a 1111001 y 1011011
 % respectivamente. 
 trellis = poly2trellis(constraint_length,[171 133]);
+% Según sistema PRIME
 traceback_length = 42;
 
 % Bucle que itera para todas las SNR
@@ -807,7 +811,7 @@ ylabel('BER (Bit Error Rate)')
 xlabel('SNR (Signal to Noise Relation)')
 title('Curvas BER vs SNR con canal, ecualizador y FEC')
 
-%% Juntando todos los bloques del sistema
+%% Todos los bloques del sistema: Codificador, Aleatorización, Entrelazado, Ecualización
 constraint_length = 7; 
 trellis = poly2trellis(7,[171 133]);
 traceback_length = 42;
