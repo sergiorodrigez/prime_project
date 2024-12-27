@@ -412,7 +412,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(2, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -426,7 +426,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 dbpsk_demod = comm.DPSKDemodulator(2,0,'BitOutput',true);
                 rx_entrelazado = dbpsk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_bits = desaleatorizacion(rx_aleatorio, vector_aleatorizacion);  
 
             % Si la modulación de subportadora es DQPSK
@@ -437,7 +437,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(4, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -450,7 +450,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 dqpsk_demod = comm.DPSKDemodulator(4,0,'BitOutput',true);
                 rx_entrelazado = dqpsk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_bits = desaleatorizacion(rx_aleatorio, vector_aleatorizacion);  
                 
             % Si la modulación de subportadora es D8PSK
@@ -461,7 +461,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
                 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(8, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -474,7 +474,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 d8psk_demod = comm.DPSKDemodulator(8,0,'BitOutput',true);
                 rx_entrelazado = d8psk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_bits = desaleatorizacion(rx_aleatorio, vector_aleatorizacion);  
 
             end
@@ -878,7 +878,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_codec);
 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(2, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -893,7 +893,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 dbpsk_demod = comm.DPSKDemodulator(2,0,'BitOutput',true);
                 rx_entrelazado = dbpsk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_codec = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
 
                 % Decodifico
@@ -913,7 +913,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_codec);
                 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(4, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -927,7 +927,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 dqpsk_demod = comm.DPSKDemodulator(4,0,'BitOutput',true);
                 rx_entrelazado = dqpsk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_codec = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
 
                 % Decodifico
@@ -947,7 +947,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_codec);
                 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(8, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -961,7 +961,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 d8psk_demod = comm.DPSKDemodulator(8,0,'BitOutput',true);
                 rx_entrelazado = d8psk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_codec = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
 
                 % Decodifico
@@ -1053,7 +1053,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(2, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -1068,7 +1068,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 dbpsk_demod = comm.DPSKDemodulator(2,0,'BitOutput',true);
                 rx_entrelazado = dbpsk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_bits = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
 
             % Si la modulación de subportadora es DQPSK
@@ -1079,7 +1079,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
                 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(4, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -1093,7 +1093,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 dqpsk_demod = comm.DPSKDemodulator(4,0,'BitOutput',true);
                 rx_entrelazado = dqpsk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_bits = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
                 
             % Si la modulación de subportadora es D8PSK
@@ -1104,7 +1104,7 @@ for snr=1:length(SNR_dB)
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_bits);
                 
                 % Entrelazado
-                tx_entrelazado = entrelazado(tx_aleatorio,M);
+                tx_entrelazado = entrelazado(tx_aleatorio,2*l_trama/M);
                 
                 [x_ofdm, piloto] = mod_todo(8, tx_entrelazado, Nfft, Nofdm, Nf,1,Lcp);
 
@@ -1118,7 +1118,7 @@ for snr=1:length(SNR_dB)
                 % Demodulación
                 d8psk_demod = comm.DPSKDemodulator(8,0,'BitOutput',true);
                 rx_entrelazado = d8psk_demod(x_eq);
-                rx_aleatorio = desentrelazado(rx_entrelazado,M);
+                rx_aleatorio = desentrelazado(rx_entrelazado,2*l_trama/M);
                 rx_bits = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
 
             end
