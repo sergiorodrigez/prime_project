@@ -528,7 +528,7 @@ title('Curvas BER vs SNR con canal ideal y entrelazado')
 constraint_length = 7; 
 
 % Bits vaciado
-flush_bits = zeros(constraint_length,1);
+flush_bits = zeros(constraint_length-1,1);
 
 %d8psk
 N_d8psk = 144*M;
@@ -897,8 +897,7 @@ for snr=1:length(SNR_dB)
                 rx_codec = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
 
                 % Decodifico
-                rx_bits = vitdec([rx_codec; tx_codec_flush],trellis,traceback_length,'trunc', 'hard');
-                rx_bits = rx_bits(1:end-length(flush_bits));
+                rx_bits = vitdec(rx_codec,trellis,traceback_length,'trunc', 'hard');
 
             % Si la modulación de subportadora es DQPSK
             elseif i == 2
@@ -931,17 +930,14 @@ for snr=1:length(SNR_dB)
                 rx_codec = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
 
                 % Decodifico
-                rx_bits = vitdec([rx_codec; tx_codec_flush],trellis,traceback_length,'trunc', 'hard');
-                rx_bits = rx_bits(1:end-length(flush_bits));
+                rx_bits = vitdec(rx_codec,trellis,traceback_length,'trunc', 'hard'); 
                 
             % Si la modulación de subportadora es D8PSK
             elseif i == 3
                 tx_bits = randi([0,1],l_trama,1);
 
                 % Codifico bits
-                tx_codec = convenc([tx_bits; flush_bits], trellis);
-                tx_codec_flush = tx_codec(end-2*length(flush_bits)+1:end);
-                tx_codec = tx_codec(1:end-2*length(flush_bits));
+                tx_codec = convenc(tx_bits, trellis);
 
                 % Aleatorización
                 [tx_aleatorio, vector_aleatorizacion] = aleatorizacion(tx_codec);
@@ -965,8 +961,7 @@ for snr=1:length(SNR_dB)
                 rx_codec = desaleatorizacion(rx_aleatorio, vector_aleatorizacion); 
 
                 % Decodifico
-                rx_bits = vitdec([rx_codec; tx_codec_flush],trellis,traceback_length,'trunc', 'hard');
-                rx_bits = rx_bits(1:end-length(flush_bits));
+                rx_bits = vitdec(rx_codec,trellis,traceback_length,'trunc', 'hard');
 
             end
             % Guardo tramas recibidas en una matriz
