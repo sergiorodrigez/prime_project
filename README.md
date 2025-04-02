@@ -51,7 +51,7 @@ Below are some key results showing the BER performance under various configurati
 ## Authors
 
 - Sergio Rodríguez García  
-- Miguel Torres Valls
+- Miguel Torres Valls: https://github.com/migueltorresvalls
 
 ## License
 
